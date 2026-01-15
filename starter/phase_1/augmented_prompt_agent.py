@@ -17,8 +17,10 @@ augmented_agent_response = agent.respond(prompt)
 
 print(augmented_agent_response)
 
-# The agent likely used its pre-trained knowledge about world geography to answer the prompt.
-# The capital of France (Paris) is part of the model's general knowledge base.
-# The system prompt with the persona instruction forced the agent to start its response with
-# "Dear students," giving it a formal, educational tone consistent with a college professor's
-# style of addressing students, rather than providing a plain direct answer.
+# Print analysis of knowledge source and persona impact
+print("\n Analysis:")
+print("The agent likely used its pre-trained knowledge about world geography to answer the prompt.")
+print("The capital of France (Paris) is part of the model's general knowledge base.")
+print("The system prompt with the persona instruction forced the agent to start its response with")
+print('"Dear students," giving it a formal, educational tone consistent with a college professor\'s')
+print("style of addressing students, rather than providing a plain direct answer.")
