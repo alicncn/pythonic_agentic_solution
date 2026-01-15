@@ -12,7 +12,9 @@ load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # load the product spec
-with open("Product-Spec-Email-Router.txt", "r") as file:
+script_dir = os.path.dirname(__file__)
+product_spec_path = os.path.join(script_dir, "Product-Spec-Email-Router.txt")
+with open(product_spec_path, "r") as file:
     product_spec = file.read()
 
 # Instantiate all the agents
@@ -182,5 +184,26 @@ for idx, step in enumerate(workflow_steps, 1):
 print(f"\n\n{'='*80}")
 print("WORKFLOW COMPLETED")
 print('='*80)
+
+# Save the output to a file
+output_file = os.path.join(os.path.dirname(__file__), "workflow_output.txt")
+with open(output_file, "w", encoding="utf-8") as f:
+    f.write("WORKFLOW EXECUTION RESULTS\n")
+    f.write("="*80 + "\n\n")
+    f.write(f"Workflow Prompt: {workflow_prompt}\n\n")
+    f.write(f"Workflow Steps Extracted:\n")
+    for i, step in enumerate(workflow_steps, 1):
+        f.write(f"  {i}. {step}\n")
+    f.write("\n" + "="*80 + "\n\n")
+    
+    for idx, (step, result) in enumerate(zip(workflow_steps, completed_steps), 1):
+        f.write(f"Step {idx}: {step}\n")
+        f.write("-"*80 + "\n")
+        f.write(f"{result}\n\n")
+    
+    f.write("="*80 + "\n")
+    f.write("WORKFLOW COMPLETED\n")
+
+print(f"\nOutput saved to: {output_file}")
 print("\nFinal Output (Last Completed Step):")
 print(completed_steps[-1] if completed_steps else "No steps completed")
